@@ -32,10 +32,10 @@ const HeroLander = () => {
                 eyes.
               </p>
               <div className="flex  flex-col items-start gap-8">
-                <div className="w-11/12 mx-auto">
-              <Button>Explore</Button>
+                <div className="w-5/12 mx-auto md:w-11/12">
+              <Button className="w-full md:w-fit">Explore</Button>
               </div>
-                <div className="w-full md:w-full">
+                <div className="w-60 md:w-full ">
                   <Image
                     src={images}
                     alt="landing image1"
@@ -47,7 +47,7 @@ const HeroLander = () => {
               </div>
             </div>
 
-            <div className="  w-11/12 mx-auto flex flex-col md:flex-row gap-9">
+            <div className=" hidden w-11/12 mx-auto md:flex flex-col md:flex-row gap-9">
               <div>
                 <Image src={image1} alt="image1" width={400} height={400} />
               </div>

@@ -7,7 +7,7 @@ import image3 from '/public/Rectangle 97.png'
 const Placerecozmmandate = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-11/12 lg:w-10/12 mx-auto">
-    <div className="flex flex-col md:flex-row gap-4">
+    <div className="flex  md:flex-row gap-4">
       <div className="flex flex-col gap-6 mt-10 md:mt-20">
         <Image
           src={image1}
