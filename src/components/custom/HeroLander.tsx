@@ -71,6 +71,7 @@ const HeroLander = () => {
           </div>
          
         </div>
+        
         <div>
           <Placerecozmmandate />
         </div>
