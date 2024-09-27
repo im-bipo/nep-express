@@ -1,4 +1,5 @@
-import HeroLander from '@/components/HeroLander'
+
+import HeroLander from '@/components/custom/HeroLander'
 import { Button } from '@/components/ui/button'
 import React from 'react'
 
