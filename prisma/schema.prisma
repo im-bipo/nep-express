@@ -1,0 +1,107 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+model User {
+  id      String   @id @default(uuid())
+  name    String
+  email   String   @unique
+  role    Role     @default(GUEST)
+  Tourist Tourist?
+  Guide   Guide?
+  Verndor Vendor?
+}
+
+model Tourist {
+  id     String  @id @default(uuid())
+  local  Boolean
+  user   User    @relation(fields: [userId], references: [id])
+  userId String  @unique
+  trips  Trip[]
+}
+
+model Vendor {
+  id          String @id @default(uuid())
+  name        String
+  description String
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+
+  addedGoods Goods[]
+}
+
+model Guide {
+  id String @id @default(uuid())
+
+  user        User    @relation(fields: [userId], references: [id])
+  userId      String  @unique
+  addedPalces Place[] @relation("addedPlaces")
+  acivePlaces Place[] @relation("activePlaces")
+}
+
+model Place {
+  id          String             @id @default(uuid())
+  name        String
+  description String
+  category    LocationCategory[] @default([NORMAL])
+  lat         Float
+  long        Float
+  rating      Float
+  thumbnail   String[]
+
+  addedBy   Guide  @relation("addedPlaces", fields: [addedById], references: [id])
+  addedById String
+
+  activeGuide Guide[] @relation("activePlaces")
+  Trip        Trip?   @relation(fields: [tripId], references: [id])
+  tripId      String?
+
+  goods Goods[]
+}
+
+model Trip {
+  id          String  @id @default(uuid())
+  name        String
+  touristT_id String?
+
+  Tourist   Tourist? @relation(fields: [touristId], references: [id])
+  touristId String?
+
+  places Place[]
+}
+
+model Goods {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  price       Float
+  quantity    Int
+  category    String
+  image       String[]
+  place       Place[]
+  Vendor      Vendor?  @relation(fields: [vendorId], references: [id])
+  vendorId    String?
+}
+
+enum Role {
+  VENDOR
+  TOURIST
+  GUIDE
+  GUEST
+}
+
+enum LocationCategory {
+  HISTORICAL
+  CULTURAL
+  NATURAL
+  JOYFULL
+  ADVENTURE
+  NORMAL
+}
