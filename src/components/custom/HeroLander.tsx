@@ -20,7 +20,7 @@ const HeroLander = () => {
         <div className="bg-gray-200 ">
           <div className=" grid grid-cols-1 md:grid-cols-2 gap-8 pt-20 ">
             <div className="flex flex-col gap-12">
-              <h1 className="  w-11/12 mx-auto  text-xl font-medium font-serif">
+              <h1 className="  w-11/12 mx-auto  text-xl font-medium">
                 Welcome to <span className="text-primary">Nep</span>
                 <span className="text-secondary">express...</span>
               </h1>
