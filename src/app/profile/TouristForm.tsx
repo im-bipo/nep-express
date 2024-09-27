@@ -1,12 +1,15 @@
 import { useState } from "react";
 import Image from "next/image";
 // import image from "/public/nepexpress-01 1.png";
-import image from '/public/Rectangle 96.png'
-
-
+import image from "/public/Rectangle 96.png";
+import { iamTourist } from "@/actions/user";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { Button } from "@/components/ui/button";
 
 const Tourist = () => {
-   const [touristType, setTouristType] = useState("");
+  const { user } = useKindeBrowserClient();
+  const [touristType, setTouristType] = useState("");
+
   return (
     <div className="form-container w-11/12 mx-auto grid grid-cols-2 gap-6 justify-center items-center mb-32 mt-14">
       <div className="flex flex-col justify-center items-center">
@@ -24,12 +27,13 @@ const Tourist = () => {
       </div>
 
       <form
-        
+        action={iamTourist}
         className="flex flex-col gap-10 w-full bg-white text-black py-4 px-10 rounded-md border-2 shadow-md mt-9"
       >
         <h1 className="text-secondary font-semibold text-xl">
           Tourist Details Form
         </h1>
+        <input type="text" value={user?.id as string} name="id" hidden />
 
         <div className="flex flex-col gap-2">
           <label htmlFor="touristType">Tourist Type:</label>
@@ -88,12 +92,12 @@ const Tourist = () => {
         )}
 
         <div className="flex justify-center items-center">
-          <button
+          <Button
             type="submit"
-            className="text-white bg-mainColor w-fit px-6 py-2"
+            className="w-fit px-6 py-2"
           >
             Submit
-          </button>
+          </Button>
         </div>
       </form>
     </div>
