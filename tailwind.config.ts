@@ -15,6 +15,7 @@ const config: Config = {
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
+				
   			},
   			popover: {
   				DEFAULT: 'hsl(var(--popover))',
@@ -25,8 +26,7 @@ const config: Config = {
   				foreground: 'hsl(var(--primary-foreground))'
   			},
   			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))',
-  				foreground: 'hsl(var(--secondary-foreground))'
+  				DEFAULT: '#003794'
   			},
   			muted: {
   				DEFAULT: 'hsl(var(--muted))',
@@ -56,6 +56,7 @@ const config: Config = {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		}
+		 
   	}
   },
   plugins: [require("tailwindcss-animate")],
