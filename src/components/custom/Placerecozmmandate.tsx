@@ -14,14 +14,14 @@ const Placerecozmmandate = () => {
           alt=""
           width={400}
           height={400}
-          className="w-full md:w-56 rounded-xl object-cover"
+          className="w-40 md:w-56 rounded-xl object-cover"
         />
         <Image
           src={image2}
           alt=""
           width={400}
           height={400}
-          className="w-full md:w-56 rounded-xl object-cover"
+          className="w-40 md:w-56 rounded-xl object-cover"
         />
       </div>
       <div className="flex flex-col gap-6">
@@ -30,14 +30,14 @@ const Placerecozmmandate = () => {
           alt=""
           width={400}
           height={400}
-          className="w-full md:w-60 rounded-xl object-cover"
+          className="w-40 md:w-60 rounded-xl object-cover"
         />
         <Image
           src={image2}
           alt=""
           width={400}
           height={400}
-          className="w-full md:w-60 rounded-xl object-cover"
+          className="w-40 md:w-60 rounded-xl object-cover"
         />
       </div>
     </div>
