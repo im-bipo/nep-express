@@ -1,3 +1,4 @@
+import HeroLander from '@/components/HeroLander'
 import { Button } from '@/components/ui/button'
 import React from 'react'
 
@@ -5,7 +6,7 @@ const App = () => {
   return (
     <div>
       
-      <Button>hekk</Button>
+     <HeroLander/>
     </div>
   )
 }
