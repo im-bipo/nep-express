@@ -9,6 +9,7 @@ import Placerecozmmandate from "./Placerecozmmandate";
 import Happy from "./Happy";
 import Merchant from "./Merchant";
 import Subscribe from "./Subscribe";
+import Link from "next/link";
 
 
 const HeroLander = () => {
@@ -28,12 +29,14 @@ const HeroLander = () => {
                 Discover the enchanting beauty and rich culture of Nepal with
                 Nepexpress, your ultimate destination for authentic Nepalese
                 experiences. Embrace the magic of this captivating nation with
-                Nepexpress and let Nepal's beauty and charm unfold before your
+                Nepexpress and let Nepal&apos;s beauty and charm unfold before your
                 eyes.
               </p>
               <div className="flex  flex-col items-start gap-8">
                 <div className="w-5/12 mx-auto md:w-11/12">
-              <Button className="w-full md:w-fit">Explore</Button>
+              <Button className="w-full md:w-fit">
+                <Link href='destination'>Explore</Link>
+              </Button>
               </div>
                 <div className="w-60 md:w-full ">
                   <Image

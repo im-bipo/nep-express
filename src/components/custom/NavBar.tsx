@@ -11,23 +11,23 @@ import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 const data = [
   {
     title: "Home",
-    to: "/#",
+    to: "/",
   },
   {
-    title: "About",
-    to: "/#",
+    title: "Destination",
+    to: "/destination",
   },
   {
     title: "Guides",
-    to: "/#",
+    to: "/guides",
   },
   {
     title: "Nepmarket",
-    to: "/#",
+    to: "/nepmarket",
   },
   {
     title: "Contact",
-    to: "/#",
+  to: "/contact",
   },
 ];
 
