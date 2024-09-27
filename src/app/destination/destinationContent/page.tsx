@@ -1,4 +1,6 @@
 import { IoLocationSharp } from "react-icons/io5";
+import Link from "next/link";
+import { Button } from "../../../components/ui/button";
 import { MdDateRange } from "react-icons/md";
 
 const DestinationPage = ({
@@ -44,6 +46,10 @@ const DestinationPage = ({
           </div>
         </div>
       ))}
+
+      <Link href="/destination/destinationContent/timeline">
+        <Button>Next</Button>
+      </Link>
     </main>
   );
 };
