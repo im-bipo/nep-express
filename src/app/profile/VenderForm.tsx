@@ -8,7 +8,7 @@ const Vender = () => {
   return (
     <>
       <div className="w-full  mx-auto mt-10 bg-white px-14 py-9 rounded-md shadow-md">
-        <h2 className="text-2xl font-bold mb-4"> Vender Registration Form</h2>
+        <h2 className="text-2xl font-bold mb-4"> Vendor Registration Form</h2>
 
         <form action={iamVendor}>
           <div className="mb-4">

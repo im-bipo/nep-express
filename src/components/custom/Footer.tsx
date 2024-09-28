@@ -11,6 +11,7 @@ import fonepay from "/public/fonepay.png";
 import khalti from "/public/khalti.png";
 import Image from "next/image";
 import imagess from '/public/image 45.png'
+import imepay from '/public/IMEPAY copy.jpg'
 
 const Footer = () => {
   return (
@@ -64,15 +65,26 @@ const Footer = () => {
             Payment Method
           </h1>
           <div className="flex flex-col sm:flex-row gap-6">
+            <div>
             <Image
               src={khalti}
               alt="Khalti Logo"
               width={500}
               height={500}
-              className="w-44 lg:w-60"
+              className="w-44 lg:w-44"
             />
-            <div className="flex flex-col gap-4">
-              <Image
+             <Image
+                src={imepay}
+                alt="Esewa Logo"
+                width={500}
+                height={500}
+                className="w-36 lg:w-44"
+              />
+            
+           </div>
+            <div className="flex flex-col gap-4 pt-5">
+           
+               <Image
                 src={esewa}
                 alt="Esewa Logo"
                 width={500}

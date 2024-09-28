@@ -62,7 +62,7 @@ const Guest = () => {
                 className="text-md font-medium bg-red-500 py-2 px-8 rounded-md text-white"
                 onClick={() => toggleTab(3)}
               >
-                Vender
+                Vendor
               </Button>
             </div>
           </div>

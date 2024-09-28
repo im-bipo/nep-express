@@ -5,7 +5,7 @@ import {
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
-import {  FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
+import {  FaDiscord, FaGithub, FaGoogle } from "react-icons/fa";
 import image1 from '/public/image 48.png'
 import image2 from '/public/image 47 (2).png'
 
@@ -42,8 +42,8 @@ const Login = async () => {
 
 
       </div>
-    <div className="flex flex-col gap-5 w-[600px] py-5 shadow-xl px-28 pt-20">
-      <div className="flex  items-center gap-3">
+    <div className="flex flex-col gap-5 w-[600px] py-5 shadow-xl px-28 pt-20 items-center font-bold">
+      <div className="flex justify-center items-center gap-3">
         <div className="w-32 bg-secondary h-[2px]"></div>
       <h1 className="text-xl text-secondary ">Sign in via</h1>
       <div className="w-28 bg-secondary h-[2px]"></div>
@@ -63,16 +63,16 @@ SIGN IN WITH GOOGLE
         postLoginRedirectURL="/api/auth/create"
         authUrlParams={{ connection_id: githubConnectinoId }}
       >
-     SIGN I N WITH GITHUB
+     SIGN IN WITH GITHUB
       </RegisterLink>
       </div>
-<div className="flex justify-center items-center border-2 border-black w-96 bg-transparent px-4 py-4 gap-6 rounded-xl ">
-  <FaFacebook/>
+<div className="flex justify-center items-center border-2 border-black w-96 bg-transparent px-6 py-4 gap-6 rounded-xl ">
+  <FaDiscord/>
       <RegisterLink
         postLoginRedirectURL="/api/auth/create"
         authUrlParams={{ connection_id: discordConnectinoId }}
       >
-    SIGN IN  WITH FACEBOOK
+    SIGN IN  WITH Discord
       </RegisterLink>
       </div>
   
