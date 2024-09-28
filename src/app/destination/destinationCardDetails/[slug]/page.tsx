@@ -4,10 +4,10 @@ import { BsPersonStanding } from "react-icons/bs";
 import { FaMapLocationDot } from "react-icons/fa6";
 import CopyToClipboard from "../../../components/CopyToClipboard";
 import { IoGift } from "react-icons/io5";
-import { getPlaceById } from "@/actions/place";
+import {getPlaceByName } from "@/actions/place";
 
 const DestinationDetailPage = async ({ params }: { params :{slug: string} }) => {
-  const destination = await getPlaceById(params.slug);
+  const destination = await getPlaceByName(params.slug);
   if (!destination) {
     return <p>Destination not found.</p>;
   }
@@ -36,7 +36,7 @@ const DestinationDetailPage = async ({ params }: { params :{slug: string} }) => 
 
       <div className="py-8 lg:flex-row gap-4 flex flex-col justify-center items-center">
         
-        <img src={destination.thumbnail[0]} alt={destination.name} className="w-32"/>
+        <img src={destination.thumbnail[0]} alt={destination.name} className="w-52"/>
         <div className="shadow-md w-full mt-8 lg:mt-0 p-8 bg-[#f5f5f5] lg:mx-24">
           <h1 className="text-secondary font-semibold flex items-center gap-2">
             {destination.name}
@@ -58,6 +58,9 @@ const DestinationDetailPage = async ({ params }: { params :{slug: string} }) => 
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        hello
       </div>
     </div>
   );

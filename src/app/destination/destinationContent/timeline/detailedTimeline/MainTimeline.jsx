@@ -1,5 +1,7 @@
 'use client'
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function MainTimeline() {
@@ -25,10 +27,10 @@ export default function MainTimeline() {
               <div className="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-neutral-300 dark:bg-neutral-500">
                 <p className="w-20"></p>
               </div>
-              <div className="bg-[#e4e4e4] flex w-full px-10">
+              <div className="bg-[#e4e4e4] flex w-full py-4 px-10">
                 <div className="my-4 mx-5">
-                  <Image
-                    src="/path/to/placeholder-image.jpg" 
+                  <img
+                    src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" 
                     alt={item.name}
                     width={120}
                     height={120}
@@ -40,6 +42,12 @@ export default function MainTimeline() {
                     {item.name}
                   </h4>
                   <p className="mb-3 text-sm">{item.description}</p>
+                <div className="w-full">
+                  <Button>
+                    <Link href={`/destination/destinationCardDetails/${item.name}`}>
+                    View More</Link>
+                  </Button>
+                </div>
                 </div>
               </div>
             </div>

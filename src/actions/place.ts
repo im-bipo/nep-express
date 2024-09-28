@@ -125,3 +125,55 @@ export const getPlaceById = async (id: string): Promise<Place | null> => {
   }
 };
 
+
+export const getPlaceByName = async (name: string): Promise<Place | null> => {
+  const query = `
+    SELECT id, ST_X(geom::geometry) AS lng, ST_Y(geom::geometry) AS lat, name, description, thumbnail
+    FROM "Place"
+    WHERE LOWER(name) LIKE LOWER($1);
+  `;
+  
+  try {
+    // Use Prisma's raw query function with the name as parameter
+    // We use LIKE with wildcards to allow for partial matches
+    const places = await prisma.$queryRawUnsafe<
+      Array<{
+        id: string;
+        name: string;
+        description: string;
+        lat: number;
+        lng: number;
+        thumbnail: string[];
+      }>
+    >(query, `%${name}%`);
+
+    if (places.length === 0) {
+      console.log(`No place found with name: ${name}`);
+      return null; // Return null if no place is found
+    }
+
+    // If multiple places are found, find the best match
+    const bestMatch = places.find(place => place.name.toLowerCase() === name.toLowerCase()) || places[0];
+
+    // Format the result with type safety
+    const formattedPlace: Place = {
+      id: bestMatch.id,
+      name: bestMatch.name,
+      description: bestMatch.description,
+      coordinates: {
+        lat: bestMatch.lat,
+        lng: bestMatch.lng,
+      },
+      thumbnail: bestMatch.thumbnail, // Include thumbnail in the formatted result
+    };
+
+    return formattedPlace;
+  } catch (error) {
+    console.error(`Error in getPlaceByName:`, error);
+    throw new Error(
+      `Failed to retrieve place: ${
+        error instanceof Error ? error.message : "Unknown error"
+      }`
+    );
+  }
+};
