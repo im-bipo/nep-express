@@ -2,8 +2,9 @@ import { IoLocationSharp } from "react-icons/io5";
 import Link from "next/link";
 import { Button } from "../../../components/ui/button";
 import { MdDateRange } from "react-icons/md";
+import { getPathRoutes } from "@/actions/placeRoute";
 
-const DestinationPage = ({
+const DestinationPage = async ({
   searchParams,
 }: {
   searchParams?: {
@@ -12,6 +13,11 @@ const DestinationPage = ({
     durationOfTrip: string;
   };
 }) => {
+  const res = await getPathRoutes(
+    { long: 85.310943, lat: 27.714185 },
+    { long: 82.761036, lat: 27.841117 }
+  );
+  console.log(res);
   const formData = [
     {
       title: "Starting Point",
@@ -42,6 +48,7 @@ const DestinationPage = ({
               className="text-sm w-full text-slate-700 bg-transparent outline-none"
               placeholder={`Enter Your ${val.title}`}
               value={val.value}
+              disabled
             />
           </div>
         </div>

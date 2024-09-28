@@ -11,14 +11,14 @@ const PlanYourTripForm = () => {
     finalDestination: "",
     durationOfTrip: "",
   });
-  const [availablePlaces, setAvailablePlaces] = useState([]);
+  const [availablePlaces, setAvailablePlaces] = useState<unknown>([]);
   useEffect(() => {
     (async () => {
       const res = await getPlaces();
       setAvailablePlaces(res);
     })();
   }, []);
-
+console.log(availablePlaces)
   const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
