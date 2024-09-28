@@ -3,6 +3,7 @@ import Image from 'next/image'
 import image1 from '/public/Ellipse 11.png'
 import image2 from '/public/Ellipse 12.png'
 import { Button } from '../ui/button'
+/
 const data=[
     {
 title:'For Guides',
@@ -19,6 +20,7 @@ image:image1
 ]
 
 const Merchant = () => {
+  // const router=useRouter()
   return (
   <>
 <div className="w-11/12 mx-auto flex flex-col justify-center gap-8">
