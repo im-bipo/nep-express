@@ -4,7 +4,7 @@ import "./index.css";
 
 const initialTimelineData = [
   {
-    title: "Palpa",
+    title: "Bipin",
     subtitle: "Starting Point",
   },
   {
@@ -30,9 +30,12 @@ const initialTimelineData = [
   },
 ];
 
-const Page = () => {
+const Page = ({searchParams}) => {
+  const preTrip = JSON.parse(searchParams.data)
+  console.log(preTrip)
   const referenceTitle = initialTimelineData[0].title;
   const [timelineData, setTimelineData] = useState(initialTimelineData);
+  
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
@@ -58,18 +61,20 @@ const Page = () => {
 
   return (
     <div className="timeline">
-      {timelineData.map((entry, index) => (
+      {preTrip.map((entry, index) => (
+
         <div
           key={index}
           className={`timeline-container ${index % 2 === 0 ? "left" : "right"}`}
           onClick={() => handleSelect(index)}
         >
           <div className="content">
-            <h2 className="font-semibold">{entry.title}</h2>
+            <h2 className="font-semibold">{entry.name}</h2>
             <p className="text-sm text-[#7b7b7b]">
               {entry.isEndpoint
                 ? "Endpoint"
-                : entry.subtitle.replace("{referenceTitle}", referenceTitle)}
+                : entry.description.replace("{referenceTitle}", referenceTitle)}
+
             </p>
             {selectedIndex === index && (
               <button

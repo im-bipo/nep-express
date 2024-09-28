@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+
 import NavBar from "./components/Navbar";
 import Footer from "@/components/custom/Footer";
 import SubHeader from "./components/SubHeader";
+
 
 export const metadata: Metadata = {
   title: "Nep Market",
@@ -15,6 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+
     <html>
       <body>
         <NavBar />

@@ -32,7 +32,7 @@ const PlanYourTripForm: React.FC = () => {
       }
     })();
   }, []);
-
+console.log(availablePlaces)
   const router = useRouter();
 
   // Add type annotations for the event handler
@@ -74,7 +74,9 @@ const PlanYourTripForm: React.FC = () => {
             Select Starting Point
           </option>
           {availablePlaces.map((place) => (
-            <option key={place.id} value={place.name}>
+
+            <option key={place.id} value={place.id}>
+
               {place.name}
             </option>
           ))}
@@ -96,7 +98,8 @@ const PlanYourTripForm: React.FC = () => {
             Select Final Destination
           </option>
           {availablePlaces.map((place) => (
-            <option key={place.id} value={place.name}>
+            <option key={place.id} value={place.id}>
+
               {place.name}
             </option>
           ))}
