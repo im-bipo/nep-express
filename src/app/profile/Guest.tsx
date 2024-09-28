@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import Tourist from './Tourist'
 import GuideForm from './GuideForm'
 import Vender from './Vender'
+import { LogoutLink } from '@kinde-oss/kinde-auth-nextjs'
 
 const Guest = () => {
   const [toggleState, setToggleState] = useState(0);
@@ -45,7 +46,11 @@ const Guest = () => {
       <div>
         {toggleState === 1 && (
           <>
+            <div className='flex justify-center pt-8'>
+          <Button className=" w-fit px-4 mx-auto"><LogoutLink>Log out</LogoutLink></Button>
+                          </div>
             <div><GuideForm/></div>
+
           </>
         )}
 
@@ -53,6 +58,7 @@ const Guest = () => {
           <>
             <div>
               <Tourist/>
+              <Button className="w-fit px-4 mx-auto"><LogoutLink>Log out</LogoutLink></Button>
             </div>
           </>
         )}
@@ -61,6 +67,7 @@ const Guest = () => {
           <>
             <div>
              <Vender/>
+<Button className="w-fit px-4 mx-auto"><LogoutLink>Log out</LogoutLink></Button>
             </div>
           </>
         )}
