@@ -1,9 +1,7 @@
 import { useState } from "react";
-import Image from "next/image";
-// import image from "/public/nepexpress-01 1.png";
-import image from "/public/Rectangle 96.png";
+
 import { iamTourist } from "@/actions/user";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import {  useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { Button } from "@/components/ui/button";
 
 const Tourist = () => {
@@ -11,24 +9,10 @@ const Tourist = () => {
   const [touristType, setTouristType] = useState("");
 
   return (
-    <div className="form-container w-11/12 mx-auto grid grid-cols-2 gap-6 justify-center items-center mb-32 mt-14">
-      <div className="flex flex-col justify-center items-center">
-        <Image
-          src={image}
-          alt="signin logo"
-          width={400}
-          height={400}
-          className="w-60 object-cover"
-        />
-        <p className="text-2xl font-medium">
-          WELCOME TO <span className="text-mainColor">NEP</span>
-          <span className="text-secondary">EXPRESS</span>
-        </p>
-      </div>
-
+    <div className="form-container w-11/12 mx-auto  gap-6 justify-center items-center mb-32 mt-14">
       <form
         action={iamTourist}
-        className="flex flex-col gap-10 w-full bg-white text-black py-4 px-10 rounded-md border-2 shadow-md mt-9"
+        className="flex flex-col gap-10 w-full bg-white text-black py-10 px-10 rounded-md border-2 shadow-md mt-9"
       >
         <h1 className="text-secondary font-semibold text-xl">
           Tourist Details Form
@@ -99,6 +83,7 @@ const Tourist = () => {
             Submit
           </Button>
         </div>
+
       </form>
     </div>
   );

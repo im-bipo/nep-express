@@ -45,7 +45,7 @@ const Login = async () => {
     <div className="flex flex-col gap-5 w-[600px] py-5 shadow-xl px-28 pt-20">
       <div className="flex  items-center gap-3">
         <div className="w-32 bg-secondary h-[2px]"></div>
-      <h1>Sign in via</h1>
+      <h1 className="text-xl text-secondary ">Sign in via</h1>
       <div className="w-28 bg-secondary h-[2px]"></div>
       </div>
       <div className="flex justify-center items-center border-2 border-black w-96 bg-transparent px-4  py-4 gap-6 rounded-xl ">
