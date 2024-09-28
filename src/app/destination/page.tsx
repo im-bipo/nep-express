@@ -1,6 +1,6 @@
 import React from "react";
 
-import DestinationCard from "../components/Destination_Card";
+import DestinationCard from "./Destination_Card";
 import DialogBtn from "./Dialog";
 
 const App = () => {

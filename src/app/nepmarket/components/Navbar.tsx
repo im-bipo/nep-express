@@ -1,11 +1,20 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import logo from "/public/NEPEXPRESS-01.png";
 
 const Navbar = () => {
   return (
     <nav className=" bg-white shadow-lg flex justify-around items-center">
-      <Image src={logo} alt="logo" width={80} />
+      <Link href="/">
+        <Image
+          src={logo}
+          alt="logo"
+          width={400}
+          height={400}
+          className="w-24"
+        />
+      </Link>
       <div className="flex gap-16">
         <div className="border-2 px-4 py-2 rounded-lg w-[40vw] flex items-cente">
           <input
