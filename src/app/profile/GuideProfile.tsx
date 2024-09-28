@@ -1,11 +1,14 @@
-import Image from "next/image";
-import React from "react";
-import image from "/public/Rectangle 60.png";
+/* eslint-disable @next/next/no-img-element */
 
 import { Button } from "@/components/ui/button";
-import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/server";
+import {
+  getKindeServerSession,
+  LogoutLink,
+} from "@kinde-oss/kinde-auth-nextjs/server";
 
-const GuideProfile = () => {
+const GuideProfile = async () => {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
   return (
     <>
       <h1 className="flex justify-center text-2xl font-semibold pt-8 pb-14">
@@ -14,8 +17,8 @@ const GuideProfile = () => {
       <div className="grid grid-cols-12 w-10/12 mx-auto ">
         <div className="col-span-5">
           <div className="flex flex-col gap-4">
-            <Image
-              src={image}
+            <img
+              src={user.picture}
               alt="guideprofile"
               width={500}
               height={500}
@@ -23,9 +26,9 @@ const GuideProfile = () => {
             />
             <div className="flex flex-col gap-1">
               <h1 className="text-2xl text-[#003794] font-semibold items-center px-4">
-                PRATEEK ARYAL
+               {user.given_name } {user.family_name}
               </h1>
-              <p className="text-gray-400 px-4">aryalpratik057@gmail.com</p>
+              <p className="text-gray-400 px-4">{user.email}</p>
             </div>
           </div>
         </div>
