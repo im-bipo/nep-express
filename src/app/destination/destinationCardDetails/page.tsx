@@ -36,7 +36,7 @@ const DestinationDetailPage = () => {
   }
 
   return (
-    <div className="px-10 py-5">
+    <div className="px-10 py-5">sdsds
       <h1 className="text-2xl font-bold">{destination.title}</h1>
       <Image src={destination.img} alt={destination.title} />
       <p className="mt-4">{destination.description}</p>

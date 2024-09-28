@@ -3,35 +3,37 @@
 import prisma from "@/lib/db";
 import { redirect } from "next/navigation";
 import { v4 } from "uuid";
-
 export const addNewPlace = async ({
   name,
   description,
   lat,
   long,
   userId,
+  thumbnail, // Add thumbnail as a parameter
 }: {
   name: string;
   description: string;
   lat: number;
   long: number;
   userId: string;
+  thumbnail: string[]; // Array of string URLs
 }) => {
   const uuid = v4();
   await prisma.$executeRaw`
-    INSERT INTO "Place" (id, name, description, geom, categories, "addedById")
+    INSERT INTO "Place" (id, name, description, geom, categories, thumbnail, "addedById")
     VALUES (
       ${uuid},
       ${name},
       ${description},
       ST_SetSRID(ST_MakePoint(${long}, ${lat}), 4326),
       'NORMAL',
+      ${thumbnail},
       ${userId}
-      
     );
   `;
   redirect(`/destination/destinationCardDetails/${uuid}`);
 };
+
 
 export const getPlaces = async () => {
   const places = await prisma.place.findMany({
@@ -53,6 +55,17 @@ interface Place {
     lat: number;
     lng: number;
   };
+}
+// Define the types for the Place result
+interface Place {
+  id: string;
+  name: string;
+  description: string;
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
+  thumbnail: string[]; // Adding thumbnail field as an array
 }
 // Define the types for the Place result
 interface Place {

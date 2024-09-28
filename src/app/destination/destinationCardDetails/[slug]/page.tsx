@@ -36,7 +36,7 @@ const DestinationDetailPage = async ({ params }: { params :{slug: string} }) => 
 
       <div className="py-8 lg:flex-row gap-4 flex flex-col justify-center items-center">
         
-        <img src={destination.thumbnail[0]} alt={destination.name} />
+        <img src={destination.thumbnail[0]} alt={destination.name} className="w-32"/>
         <div className="shadow-md w-full mt-8 lg:mt-0 p-8 bg-[#f5f5f5] lg:mx-24">
           <h1 className="text-secondary font-semibold flex items-center gap-2">
             {destination.name}
