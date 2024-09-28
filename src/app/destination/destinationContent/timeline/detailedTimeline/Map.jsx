@@ -27,7 +27,7 @@ const customIcon = new L.Icon({
 });
 
 const Map = () => {
-  const [position, setPosition] = useState([51.505, -0.09]); // Default position
+  const [position, setPosition] = useState([51.505, -0.09]);
 
   const MapClickHandler = () => {
     useMapEvents({

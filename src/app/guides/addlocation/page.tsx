@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import Map from "./Map";
+import RestrictedPage from "./restrictedPage";
+import Loader from "./loader";
 import { getUserData } from "@/actions/user";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
@@ -20,7 +22,7 @@ const Page = () => {
         console.log("User:", res);
       })();
     }
-  }, [id,user]);
+  }, [id, user]);
 
   const [position, setPosition] = useState([27.700769, 85.30014]);
   const [name, setName] = useState("");
@@ -52,10 +54,18 @@ const Page = () => {
   };
 
   if (validUser == undefined) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
   if (!validUser) {
-    return <div>You are not a guide.</div>;
+    return (
+      <div>
+        <RestrictedPage />
+      </div>
+    );
   }
 
   return (
