@@ -22,12 +22,12 @@ export const getPathRoutes = async (
     }
   );
 
-  const distance = 1000 * durationOfTrip; // Distance in meters
+  const distance = 3000 * durationOfTrip; // Distance in meters
 
   // Create the conditions for finding places near the route
   const locationConditions = locations
     .map(
-      ({ lat, lng }:{lat:number , lng:number}) => `
+      ({ lat, lng }) => `
         ST_DWithin(geom::geography, ST_SetSRID(ST_Point(${lng}, ${lat}), 4326), ${distance})
       `
     )

@@ -15,7 +15,7 @@ const page = async () => {
         <AddNewPlace />
       </div>
       <div className="flex">
-        {guides.map((guide, index) => (
+        {guides.map((guide) => (
           <div
             key={guide.id}
             className="p-10 py-4 m-4 bg-slate-200 w-fit rounded-md flex flex-col gap-2"
