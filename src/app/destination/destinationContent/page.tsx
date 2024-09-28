@@ -7,7 +7,7 @@ const DestinationPage = ({
   searchParams,
 }: {
   searchParams?: {
-    startinPoint: string;
+    startingPoint: string;
     finalDestination: string;
     durationOfTrip: string;
   };
@@ -16,7 +16,7 @@ const DestinationPage = ({
     {
       title: "Starting Point",
       icons: <IoLocationSharp className="text-[#d9d9d9]" />,
-      value: searchParams?.startinPoint,
+      value: searchParams?.startingPoint,
     },
     {
       title: "Final Destination",
