@@ -4,11 +4,10 @@ import prisma from "@/lib/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/types";
 
-// This must remain async
 export const GET = async () => {
   try {
-    const { getUser } = getKindeServerSession();
-    const user = await getUser();
+    const session = await getKindeServerSession(); // Await the session retrieval
+    const user = await session.getUser();
 
     if (!user || !user.id) {
       console.error('User not found or missing ID');
@@ -52,6 +51,7 @@ const createUser = async (user: KindeUser<Record<string, unknown>>) => {
         id: user.id,
         name: `${user.given_name || ''} ${user.family_name || ''}`.trim(),
         email: user.email || '',
+        image: user.picture || `https://avatar.vercel.sh/${user.id}`
       },
     });
     return data;

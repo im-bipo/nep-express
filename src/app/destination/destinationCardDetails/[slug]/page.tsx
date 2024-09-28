@@ -1,52 +1,13 @@
-"use client";
-
-import { usePathname } from "next/navigation";
-import Image, { StaticImageData } from "next/image";
-import ghandruk from "@/app/assets/ghandruk.png";
-import badimalika from "@/app/assets/badimalika.png";
-import barun from "@/app/assets/barunvalley.png";
+/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { BsPersonStanding } from "react-icons/bs";
 import { FaMapLocationDot } from "react-icons/fa6";
 import CopyToClipboard from "../../../components/CopyToClipboard";
 import { IoGift } from "react-icons/io5";
+import { getPlaceById } from "@/actions/place";
 
-interface Destination {
-  title: string;
-  description: string;
-  img: StaticImageData;
-}
-
-const destinationDetails: Record<string, Destination> = {
-  "ghandruk-village-kaski": {
-    title: "Ghandruk Village, Kaski",
-    description:
-      "A beautiful village located in Kaski district, known for its stunning views.",
-    img: ghandruk,
-  },
-  "badimalika-bajhang": {
-    title: "Badimalika, Bajhang",
-    description: "Famous for its natural beauty and pilgrimage site.",
-    img: badimalika,
-  },
-  "barun-valley-makalu": {
-    title: "Barun Valley, Makalu",
-    description:
-      "Known for its diverse flora and fauna, it's a perfect spot for trekking.",
-    img: barun,
-  },
-};
-
-const DestinationDetailPage = () => {
-  const pathname = usePathname();
-  const slug = pathname.split("/").pop();
-
-  if (!slug) {
-    return <p>Loading...</p>;
-  }
-
-  const destination = destinationDetails[slug];
-
+const DestinationDetailPage = async ({ params }: { params :{slug: string} }) => {
+  const destination = await getPlaceById(params.slug);
   if (!destination) {
     return <p>Destination not found.</p>;
   }
@@ -74,14 +35,11 @@ const DestinationDetailPage = () => {
       </nav>
 
       <div className="py-8 lg:flex-row gap-4 flex flex-col justify-center items-center">
-        <Image
-          className="rounded-lg"
-          src={destination.img}
-          alt={destination.title}
-        />
+        
+        <img src={destination.thumbnail[0]} alt={destination.name} />
         <div className="shadow-md w-full mt-8 lg:mt-0 p-8 bg-[#f5f5f5] lg:mx-24">
           <h1 className="text-secondary font-semibold flex items-center gap-2">
-            {destination.title}
+            {destination.name}
             <CopyToClipboard />
           </h1>
           <p className="text-sm mt-4">{destination.description}</p>

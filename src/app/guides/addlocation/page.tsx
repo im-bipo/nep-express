@@ -1,23 +1,20 @@
 "use client";
 
-import React, { useState } from 'react';
-import dynamic from 'next/dynamic';
+import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import { LatLngExpression } from "leaflet";
 
-const MapWithNoSSR = dynamic(() => import('../components/Map'), {
+const MapWithNoSSR = dynamic(() => import("../components/Map"), {
   ssr: false,
-  loading: () => <p>Loading map...</p>
+  loading: () => <p>Loading map...</p>,
 });
 
-
 import { useEffect } from "react";
-
 import RestrictedPage from "./restrictedPage";
 import Loader from "./loader";
 import { getUserData } from "@/actions/user";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { addNewPlace } from "@/actions/place";
-
 
 const Page: React.FC = () => {
   const [position, setPosition] = useState<LatLngExpression>([27.7172, 85.324]);
@@ -36,13 +33,13 @@ const Page: React.FC = () => {
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [thumbnail, setThumbnail] = useState<string>("");
   const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
-    // Form Validation
     if (!name.trim()) {
       setError("Name is required.");
       return;
@@ -51,30 +48,32 @@ const Page: React.FC = () => {
       setError("Description is required.");
       return;
     }
+    if (!thumbnail.trim()) {
+      setError("Thumbnail URL is required.");
+      return;
+    }
 
-    // Submit the new place
     await addNewPlace({
       userId: id,
       name,
       description,
       lat: (position as number[])[0],
       long: (position as number[])[1],
+      thumbnail: [thumbnail],
     });
   };
 
-  // Loader while user validation is in progress
   if (validUser === undefined) {
     return <Loader />;
   }
 
-  // Restrict access for non-guide users
   if (!validUser) {
     return <RestrictedPage />;
   }
 
   return (
     <main className="bg-[#F2F6FB] flex flex-col justify-center lg:items-center px-20 py-10">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
         {error && <p className="text-red-600">{error}</p>}
 
         <div className="my-4 w-full lg:w-[50vw] border-b-2 border-[#d9d9d9]">
@@ -95,6 +94,17 @@ const Page: React.FC = () => {
             onChange={(e) => setDescription(e.target.value)}
             className="my-4 text-sm w-full placeholder:text-[#d9d9d9] text-[#a1a1a1] bg-transparent outline-none"
             placeholder="Enter the Description"
+          />
+        </div>
+
+        <div className="my-4 w-full lg:w-[50vw] border-b-2 border-[#d9d9d9]">
+          <label htmlFor="thumbnail">Thumbnail</label>
+          <input
+            type="text"
+            value={thumbnail}
+            onChange={(e) => setThumbnail(e.target.value)}
+            className="my-4 text-sm w-full placeholder:text-[#d9d9d9] text-[#a1a1a1] bg-transparent outline-none"
+            placeholder="Enter the Thumbnail URL"
           />
         </div>
 
