@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Map from "./Map";
 import { getUserData } from "@/actions/user";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { addNewPlace } from "@/actions/place";
 
 const Page = () => {
   const { user } = useKindeBrowserClient();
@@ -17,10 +18,9 @@ const Page = () => {
         } else {
           setValidUser(false);
         }
-        console.log("User:", res);
       })();
     }
-  }, [id,user]);
+  }, [id, user]);
 
   const [position, setPosition] = useState([27.700769, 85.30014]);
   const [name, setName] = useState("");
@@ -40,15 +40,13 @@ const Page = () => {
       setError("Description is required.");
       return;
     }
-
-    const formData = {
-      name,
-      description,
-      latitude: position[0],
-      longitude: position[1],
-    };
-
-    console.log("Submitting:", formData);
+    addNewPlace({
+      userId: id,
+      name: name,
+      description: description,
+      lat: position[0],
+      long: position[1],
+    });
   };
 
   if (validUser == undefined) {

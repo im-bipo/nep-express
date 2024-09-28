@@ -1,8 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { IoLocationSharp } from "react-icons/io5";
 import { MdDateRange } from "react-icons/md";
+import { getPlaces } from "@/actions/place";
 
 const PlanYourTripForm = () => {
   const [formValues, setFormValues] = useState({
@@ -10,10 +11,17 @@ const PlanYourTripForm = () => {
     finalDestination: "",
     durationOfTrip: "",
   });
+  const [availablePlaces, setAvailablePlaces] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const res = await getPlaces();
+      setAvailablePlaces(res);
+    })();
+  }, []);
 
   const router = useRouter();
 
-  const handleChange = (e: { target: { name: any; value: any } }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormValues((prev) => ({ ...prev, [name]: value }));
   };
