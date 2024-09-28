@@ -6,7 +6,7 @@ import React from "react";
 
 const page = async () => {
   const guides = await getGuides();
-  console.log(guides);
+
   return (
     <div className="container">
       <div className="w-full flex flex-row-reverse my-4">
