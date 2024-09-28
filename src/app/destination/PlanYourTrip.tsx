@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { IoLocationSharp } from "react-icons/io5";
 import { MdDateRange } from "react-icons/md";
 import { getPlaces } from "@/actions/place";
 
@@ -12,6 +11,7 @@ const PlanYourTripForm = () => {
     durationOfTrip: "",
   });
   const [availablePlaces, setAvailablePlaces] = useState([]);
+
   useEffect(() => {
     (async () => {
       const res = await getPlaces();
@@ -21,7 +21,9 @@ const PlanYourTripForm = () => {
 
   const router = useRouter();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
+  ) => {
     const { name, value } = e.target;
     setFormValues((prev) => ({ ...prev, [name]: value }));
   };
@@ -33,7 +35,7 @@ const PlanYourTripForm = () => {
   const handleNext = () => {
     if (isFormValid) {
       router.push(
-        `/destination/destinationContent?startinPoint=${formValues.startingPoint}&finalDestination=${formValues.finalDestination}&durationOfTrip=${formValues.durationOfTrip}`
+        `/destination/destinationContent?startingPoint=${formValues.startingPoint}&finalDestination=${formValues.finalDestination}&durationOfTrip=${formValues.durationOfTrip}`
       );
     }
   };
@@ -42,32 +44,42 @@ const PlanYourTripForm = () => {
     <form className="bg-[#F2F6FB] flex flex-col justify-center">
       <div className="py-4 px-8">
         <label htmlFor="startingPoint">Starting Point</label>
-        <div className="flex items-center justify-center my-4 border-b-2 pb-2 gap-4">
-          <IoLocationSharp className="text-[#c0c0c0]" />
-          <input
-            type="text"
-            name="startingPoint"
-            value={formValues.startingPoint}
-            onChange={handleChange}
-            className="text-sm w-full placeholder:text-[#c0c0c0] bg-transparent outline-none"
-            placeholder="Enter Your Starting Point"
-          />
-        </div>
+        <select
+          name="startingPoint"
+          value={formValues.startingPoint}
+          onChange={handleChange}
+          required
+          className="bg-[unset] border-gray-800 border-b-2 focus:outline-none mt-1 mb-4 w-[80vw] max-w-[26rem] md:w-[75%]"
+        >
+          <option value="" disabled>
+            Select Starting Point
+          </option>
+          {availablePlaces.map((place) => (
+            <option key={place.id} value={place.name}>
+              {place.name}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="py-4 px-8">
         <label htmlFor="finalDestination">Final Destination</label>
-        <div className="flex items-center justify-center my-4 border-b-2 pb-2 gap-4">
-          <IoLocationSharp className="text-[#c0c0c0]" />
-          <input
-            type="text"
-            name="finalDestination"
-            value={formValues.finalDestination}
-            onChange={handleChange}
-            className="text-sm w-full placeholder:text-[#c0c0c0] bg-transparent outline-none"
-            placeholder="Enter Your Final Destination"
-          />
-        </div>
+        <select
+          name="finalDestination"
+          value={formValues.finalDestination}
+          onChange={handleChange}
+          required
+          className="bg-[unset] border-gray-800 border-b-2 focus:outline-none mt-1 mb-4 w-[80vw] max-w-[26rem] md:w-[75%]"
+        >
+          <option value="" disabled>
+            Select Final Destination
+          </option>
+          {availablePlaces.map((place) => (
+            <option key={place.id} value={place.name}>
+              {place.name}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="py-4 px-8">
@@ -84,6 +96,7 @@ const PlanYourTripForm = () => {
           />
         </div>
       </div>
+
       <div className="flex justify-center items-center mb-4">
         <button
           type="button"
