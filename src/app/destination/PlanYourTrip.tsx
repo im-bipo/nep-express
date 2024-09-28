@@ -4,23 +4,38 @@ import { useRouter } from "next/navigation";
 import { MdDateRange } from "react-icons/md";
 import { getPlaces } from "@/actions/place";
 
-const PlanYourTripForm = () => {
-  const [formValues, setFormValues] = useState({
+interface FormValues {
+  startingPoint: string;
+  finalDestination: string;
+  durationOfTrip: string;
+}
+
+interface Place {
+  id: string;
+  name: string;
+}
+
+const PlanYourTripForm: React.FC = () => {
+  const [formValues, setFormValues] = useState<FormValues>({
     startingPoint: "",
     finalDestination: "",
     durationOfTrip: "",
   });
-  const [availablePlaces, setAvailablePlaces] = useState([]);
+
+  const [availablePlaces, setAvailablePlaces] = useState<Place[]>([]);
 
   useEffect(() => {
     (async () => {
       const res = await getPlaces();
-      setAvailablePlaces(res);
+      if (Array.isArray(res)) {
+        setAvailablePlaces(res);
+      }
     })();
   }, []);
 
   const router = useRouter();
 
+  // Add type annotations for the event handler
   const handleChange = (
     e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
   ) => {
@@ -28,11 +43,13 @@ const PlanYourTripForm = () => {
     setFormValues((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Type-safe form validation check
   const isFormValid = Object.values(formValues).every(
     (value) => value.trim() !== ""
   );
 
-  const handleNext = () => {
+  // Add type annotation for the handleNext function
+  const handleNext = (): void => {
     if (isFormValid) {
       router.push(
         `/destination/destinationContent?startingPoint=${formValues.startingPoint}&finalDestination=${formValues.finalDestination}&durationOfTrip=${formValues.durationOfTrip}`
@@ -42,8 +59,10 @@ const PlanYourTripForm = () => {
 
   return (
     <form className="bg-[#F2F6FB] flex flex-col justify-center">
-      <div className="py-4 px-8">
-        <label htmlFor="startingPoint">Starting Point</label>
+      <div className="py-4 px-8 flex flex-col gap-2">
+        <label htmlFor="startingPoint" className="font-semibold">
+          Starting Point
+        </label>
         <select
           name="startingPoint"
           value={formValues.startingPoint}
@@ -62,8 +81,10 @@ const PlanYourTripForm = () => {
         </select>
       </div>
 
-      <div className="py-4 px-8">
-        <label htmlFor="finalDestination">Final Destination</label>
+      <div className="py-4 px-8 flex flex-col gap-2">
+        <label htmlFor="finalDestination" className="font-semibold">
+          Final Destination
+        </label>
         <select
           name="finalDestination"
           value={formValues.finalDestination}
@@ -81,9 +102,10 @@ const PlanYourTripForm = () => {
           ))}
         </select>
       </div>
-
       <div className="py-4 px-8">
-        <label htmlFor="durationOfTrip">Number Of Trip Days</label>
+        <label htmlFor="durationOfTrip" className="font-semibold">
+          Number Of Trip Days
+        </label>
         <div className="flex items-center justify-center my-4 border-b-2 pb-2 gap-4">
           <MdDateRange className="text-[#c0c0c0]" />
           <input
