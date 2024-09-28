@@ -12,6 +12,7 @@ model User {
   id      String   @id @default(uuid())
   name    String
   email   String   @unique
+  image   String
   role    Role     @default(GUEST)
   Tourist Tourist?
   Guide   Guide?
@@ -71,7 +72,7 @@ model Trip {
 
   Tourist   Tourist? @relation(fields: [touristId], references: [id])
   touristId String?
-                                                    
+
   places Place[]
 }
 
