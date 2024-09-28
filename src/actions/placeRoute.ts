@@ -22,7 +22,7 @@ export const getPathRoutes = async (
     }
   );
 
-  const distance = 3000 * durationOfTrip; // Distance in meters
+  const distance = 6000 * durationOfTrip; // Distance in meters
 
   // Create the conditions for finding places near the route
   const locationConditions = locations
