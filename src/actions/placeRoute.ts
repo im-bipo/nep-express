@@ -1,14 +1,11 @@
 "use server";
 
-import prisma from "@/lib/db";
+// import prisma from "@/lib/db";
 
 export const getPathRoutes = async (
   initiaPlace: { lat: number; long: number },
   finalDestination: { lat: number; long: number }
 ) => {
-  //   const data = await fetch(
-  //     "https://api.mapbox.com/directions/v5/mapbox/driving/83.457501%2C27.704004%3B85.31094%2C27.714186%3B84.438801%2C27.639049?alternatives=false&continue_straight=false&geometries=geojson&language=en&overview=full&steps=true&notifications=none&access_token=pk.eyJ1IjoiaW0tYmlwbyIsImEiOiJjbTEyaG56cXAxMWRnMm9yM3E4NDQ5ZmR0In0.lYKbXb--Fng0nTVEAHiEyg"
-  //   );
   console.log(
     "--------------------------------------------------------------------------------------------------------------------------"
   );
