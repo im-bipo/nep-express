@@ -10,6 +10,7 @@ import esewa from "/public/Esewa_logo.webp";
 import fonepay from "/public/fonepay.png";
 import khalti from "/public/khalti.png";
 import Image from "next/image";
+import imagess from '/public/image 45.png'
 
 const Footer = () => {
   return (
@@ -89,6 +90,12 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <div className='relative'>
+            <Image src={imagess} alt='footer image' width={400} height={400} className='w-full'/>
+            <div className='absolute bottom-0 left-[500px] py-3'>
+                <p className='text-white'>© 2023 Nepexpress ® Pvt. Ltd. All Rights Reserved</p>
+            </div>
+        </div>
     </>
   );
 };

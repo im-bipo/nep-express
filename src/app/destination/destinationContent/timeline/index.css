@@ -2,7 +2,6 @@
   position: relative;
   max-width: 700px;
   margin: 0 auto;
-  margin-bottom: 10px;
 }
 
 .timeline::after {
@@ -16,14 +15,14 @@
   margin-left: -3px;
 }
 
-.container {
+.timeline-container {
   padding: 10px 40px;
   position: relative;
   background-color: inherit;
   width: 50%;
 }
 
-.container::after {
+.timeline-container::after {
   content: "";
   position: absolute;
   width: 25px;
@@ -86,13 +85,13 @@
     left: 31px;
   }
 
-  .container {
+  .timeline-container {
     width: 100%;
     padding-left: 70px;
     padding-right: 25px;
   }
 
-  .container::before {
+  .timeline-container::before {
     left: 60px;
     border: medium solid white;
     border-width: 10px 10px 10px 0;

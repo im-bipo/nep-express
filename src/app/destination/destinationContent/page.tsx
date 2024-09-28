@@ -2,32 +2,43 @@ import { IoLocationSharp } from "react-icons/io5";
 import Link from "next/link";
 import { Button } from "../../../components/ui/button";
 import { MdDateRange } from "react-icons/md";
+import { getPlaceById } from "@/actions/place";
 import { getPathRoutes } from "@/actions/placeRoute";
 
 const DestinationPage = async ({
   searchParams,
 }: {
   searchParams?: {
-    startinPoint: string;
+    startingPoint: string;
     finalDestination: string;
     durationOfTrip: string;
   };
 }) => {
-  const res = await getPathRoutes(
-    { long: 85.310943, lat: 27.714185 },
-    { long: 82.761036, lat: 27.841117 }
+  const starting = await getPlaceById(searchParams?.startingPoint || "");
+  const final = await getPlaceById(searchParams?.finalDestination || "");
+  const preTrip = await getPathRoutes(
+    {
+      long: starting?.coordinates.lng as number,
+      lat: starting?.coordinates.lat as number,
+    },
+    {
+      long: final?.coordinates.lng as number,
+      lat: final?.coordinates.lat as number,
+    },
+
+    Number(searchParams?.durationOfTrip)
   );
-  console.log(res);
+
   const formData = [
     {
       title: "Starting Point",
       icons: <IoLocationSharp className="text-[#d9d9d9]" />,
-      value: searchParams?.startinPoint,
+      value: starting?.name,
     },
     {
       title: "Final Destination",
       icons: <IoLocationSharp className="text-[#d9d9d9]" />,
-      value: searchParams?.finalDestination,
+      value: final?.name,
     },
     {
       title: "Duration of Trip",
@@ -54,7 +65,11 @@ const DestinationPage = async ({
         </div>
       ))}
 
-      <Link href="/destination/destinationContent/timeline">
+      <Link
+        href={`/destination/destinationContent/timeline?data=${JSON.stringify(
+          preTrip
+        )}`}
+      >
         <Button>Next</Button>
       </Link>
     </main>

@@ -1,13 +1,13 @@
 import { iamVendor } from "@/actions/user";
 import { Button } from "@/components/ui/button";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import {  useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import React from "react";
 
 const Vender = () => {
   const { user } = useKindeBrowserClient();
   return (
     <>
-      <div className="max-w-md mx-auto mt-10 bg-white p-6 rounded-md shadow-md">
+      <div className="w-full  mx-auto mt-10 bg-white px-14 py-9 rounded-md shadow-md">
         <h2 className="text-2xl font-bold mb-4"> Vender Registration Form</h2>
 
         <form action={iamVendor}>
@@ -29,6 +29,7 @@ const Vender = () => {
               PAN Documnets
             </label>
             <input
+            
               type="file"
               name="PANFile"
               id="PANFile"
@@ -36,10 +37,14 @@ const Vender = () => {
               placeholder="Enter your PAN File number "
             />
           </div>
-
-          <Button type="submit" className="w-full">
+<div className="flex flex-col gap-6">
+  <div className="flex justify-center">
+          <Button type="submit" className="w-fit px-6">
             Submit
           </Button>
+          </div>
+c
+        </div>
         </form>
       </div>
     </>
