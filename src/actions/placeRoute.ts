@@ -27,7 +27,7 @@ export const getPathRoutes = async (
   // Create the conditions for finding places near the route
   const locationConditions = locations
     .map(
-      ({ lat, lng }) => `
+      ({ lat, lng }:{lat:number , lng:number}) => `
         ST_DWithin(geom::geography, ST_SetSRID(ST_Point(${lng}, ${lat}), 4326), ${distance})
       `
     )

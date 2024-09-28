@@ -2,8 +2,8 @@
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
+    "skipLibCheck": false,
+    "strict": false,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -27,8 +27,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/destination/destinationContent/timeline/page.jsx",
-    "src/app/guides/addlocation/Map.jsx",
+    "src/app/guides/addlocation/Map.tsx",
     "src/app/destination/PlanYourTrip.tsx"
-  ],
+, "src/app/guides/addlocation/page.tsx"  ],
   "exclude": ["node_modules"]
 }

@@ -1,35 +1,44 @@
 "use client";
-import { useEffect, useState } from "react";
-import Map from "./Map";
+
+import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
+import { LatLngExpression } from "leaflet";
+
+const MapWithNoSSR = dynamic(() => import('../components/Map'), {
+  ssr: false,
+  loading: () => <p>Loading map...</p>
+});
+
+
+import { useEffect } from "react";
+
 import RestrictedPage from "./restrictedPage";
 import Loader from "./loader";
 import { getUserData } from "@/actions/user";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { addNewPlace } from "@/actions/place";
 
-const Page = () => {
+
+const Page: React.FC = () => {
+  const [position, setPosition] = useState<LatLngExpression>([27.7172, 85.324]);
   const { user } = useKindeBrowserClient();
   const id = user?.id as string;
   const [validUser, setValidUser] = useState<boolean | undefined>(undefined);
+
   useEffect(() => {
     if (user) {
       (async () => {
-        const res = await getUserData({ id: id });
-        if (res?.role === "GUIDE") {
-          setValidUser(true);
-        } else {
-          setValidUser(false);
-        }
+        const res = await getUserData({ id });
+        setValidUser(res?.role === "GUIDE");
       })();
     }
   }, [id, user]);
 
-  const [position, setPosition] = useState([27.700769, 85.30014]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e: { preventDefault: () => void }) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
@@ -42,28 +51,25 @@ const Page = () => {
       setError("Description is required.");
       return;
     }
-    addNewPlace({
+
+    // Submit the new place
+    await addNewPlace({
       userId: id,
-      name: name,
-      description: description,
-      lat: position[0],
-      long: position[1],
+      name,
+      description,
+      lat: (position as number[])[0],
+      long: (position as number[])[1],
     });
   };
 
-  if (validUser == undefined) {
-    return (
-      <div>
-        <Loader />
-      </div>
-    );
+  // Loader while user validation is in progress
+  if (validUser === undefined) {
+    return <Loader />;
   }
+
+  // Restrict access for non-guide users
   if (!validUser) {
-    return (
-      <div>
-        <RestrictedPage />
-      </div>
-    );
+    return <RestrictedPage />;
   }
 
   return (
@@ -81,39 +87,41 @@ const Page = () => {
             placeholder="Enter Place Name"
           />
         </div>
+
         <div className="my-4 w-full lg:w-[50vw] border-b-2 border-[#d9d9d9]">
           <label htmlFor="description">Description</label>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="my-4 text-sm w-full placeholder:text-[#d9d9d9] text-[#a1a1a1] bg-transparent outline-none flex items-center"
+            className="my-4 text-sm w-full placeholder:text-[#d9d9d9] text-[#a1a1a1] bg-transparent outline-none"
             placeholder="Enter the Description"
           />
         </div>
 
-        <Map position={position} setPosition={setPosition} />
+        <MapWithNoSSR position={position} setPosition={setPosition} />
 
         <div className="my-4 w-full lg:w-[50vw] border-b-2 border-[#d9d9d9]">
           <label htmlFor="latitude">Latitude</label>
           <input
             type="number"
-            value={position[0]}
+            value={(position as number[])[0]}
             onChange={(e) => {
               const lat = parseFloat(e.target.value);
-              setPosition([lat, position[1]]);
+              setPosition([lat, (position as number[])[1]]);
             }}
             className="my-4 text-sm w-full placeholder:text-[#d9d9d9] text-[#a1a1a1] bg-transparent outline-none"
             placeholder="Enter latitude"
           />
         </div>
+
         <div className="my-4 w-full lg:w-[50vw] border-b-2 border-[#d9d9d9]">
           <label htmlFor="longitude">Longitude</label>
           <input
             type="number"
-            value={position[1]}
+            value={(position as number[])[1]}
             onChange={(e) => {
               const lng = parseFloat(e.target.value);
-              setPosition([position[0], lng]);
+              setPosition([(position as number[])[0], lng]);
             }}
             className="my-4 text-sm w-full placeholder:text-[#d9d9d9] text-[#a1a1a1] bg-transparent outline-none"
             placeholder="Enter longitude"
