@@ -30,7 +30,7 @@ export const addNewPlace = async ({
       
     );
   `;
-  redirect(`/destination/place/${uuid}`);
+  redirect(`/destination/destinationCardDetails/${uuid}`);
 };
 
 export const getPlaces = async () => {
@@ -38,10 +38,10 @@ export const getPlaces = async () => {
     select: {
       id: true,
       name: true,
-      thumbnail : true
+      thumbnail: true,
     },
   });
-  return places
+  return places;
 };
 
 // Define the types for the Place result
@@ -54,21 +54,40 @@ interface Place {
     lng: number;
   };
 }
+// Define the types for the Place result
+interface Place {
+  id: string;
+  name: string;
+  description: string;
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
+  thumbnail: string[]; // Adding thumbnail field as an array
+}
 
 // Define the function to get the place by ID
 export const getPlaceById = async (id: string): Promise<Place | null> => {
   const query = `
-    SELECT ST_X(geom::geometry) AS lng, ST_Y(geom::geometry) AS lat, name, description
+    SELECT ST_X(geom::geometry) AS lng, ST_Y(geom::geometry) AS lat, name, description, thumbnail
     FROM "Place"
     WHERE id = $1;
   `;
 
   try {
     // Use Prisma's raw query function with the id as parameter
-    const place = await prisma.$queryRawUnsafe<Array<{ name: string; description: string; lat: number; lng: number }>>(query, id);
+    const place = await prisma.$queryRawUnsafe<
+      Array<{
+        name: string;
+        description: string;
+        lat: number;
+        lng: number;
+        thumbnail: string[];
+      }>
+    >(query, id);
 
     if (place.length === 0) {
-      return null;  // Return null if no place is found
+      return null; // Return null if no place is found
     }
 
     // Format the result with type safety
@@ -80,10 +99,15 @@ export const getPlaceById = async (id: string): Promise<Place | null> => {
         lat: place[0].lat,
         lng: place[0].lng,
       },
+      thumbnail: place[0].thumbnail, // Include thumbnail in the formatted result
     };
 
     return formattedPlace;
   } catch (error) {
-    throw new Error(`Failed to retrieve place: ${error instanceof Error ? error.message : "Unknown error"}`);
+    throw new Error(
+      `Failed to retrieve place: ${
+        error instanceof Error ? error.message : "Unknown error"
+      }`
+    );
   }
 };
