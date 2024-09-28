@@ -50,16 +50,16 @@ const Placerecozmmandate = () => {
         Explore through the places recommended by Nepexpress and also ask our AI trained model ASKBUDDHA about any information about Nepal. See some of the hot destinations to visit at this time of year shown in picturesque views.
       </p>
       <div className="flex flex-wrap gap-6 lg:gap-14">
-        <p className="flex flex-col text-xl lg:text-2xl text-secondary">
-          <span className="text-primary text-2xl lg:text-3xl">50+</span>
+        <p className="flex flex-col text-xl lg:text-xl text-secondary">
+          <span className="text-primary text-2xl lg:text-2xl">50+</span>
           Guides
         </p>
-        <p className="flex flex-col text-xl lg:text-2xl text-secondary">
-          <span className="text-primary text-2xl lg:text-3xl">50+</span>
+        <p className="flex flex-col text-xl lg:text-xl text-secondary">
+          <span className="text-primary text-2xl lg:text-2xl">50+</span>
           Domestic Products
         </p>
-        <p className="flex flex-col text-xl lg:text-2xl text-secondary">
-          <span className="text-primary text-2xl lg:text-3xl">50+</span>
+        <p className="flex flex-col text-xl lg:text-xl text-secondary">
+          <span className="text-primary text-2xl lg:text-2xl">50+</span>
           Trip Package
         </p>
       </div>

@@ -3,7 +3,7 @@ import Image from 'next/image'
 import image1 from '/public/Ellipse 11.png'
 import image2 from '/public/Ellipse 12.png'
 import { Button } from '../ui/button'
-/
+
 const data=[
     {
 title:'For Guides',
