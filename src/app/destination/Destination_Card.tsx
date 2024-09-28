@@ -1,7 +1,7 @@
 import Image from "next/image";
-import ghandruk from "../assets/ghandruk.png";
-import badimalika from "../assets/badimalika.png";
-import barun from "../assets/barunvalley.png";
+import ghandruk from "@/app/assets/ghandruk.png";
+import badimalika from "@/app/assets/badimalika.png";
+import barun from "@/app/assets/barunvalley.png";
 import Link from "next/link";
 
 const destinations = [
@@ -30,7 +30,7 @@ const Destination_Card = () => {
           key={index}
           href={`/destination/destinationCardDetails/${destination.slug}`}
         >
-          <div className="max-w-80 max-h-48 overflow-hidden object-contain bg-[#e7e7e7] shadow-xl relative mx-10 mb-4">
+          <div className="max-w-80 max-h-48 overflow-hidden bg-[#e7e7e7] shadow-xl relative mx-10 mb-4">
             <div>{destination.img}</div>
             <div className="text-sm absolute bottom-5 text-white left-5 w-full border-l-4 pl-2 bg-black bg-opacity-45">
               {destination.title}
