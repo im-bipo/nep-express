@@ -1,8 +1,27 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Map from "./Map";
+import { getUserData } from "@/actions/user";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
 const Page = () => {
+  const { user } = useKindeBrowserClient();
+  const id = user?.id as string;
+  const [validUser, setValidUser] = useState<boolean | undefined>(undefined);
+  useEffect(() => {
+    if (user) {
+      (async () => {
+        const res = await getUserData({ id: id });
+        if (res?.role === "GUIDE") {
+          setValidUser(true);
+        } else {
+          setValidUser(false);
+        }
+        console.log("User:", res);
+      })();
+    }
+  }, [id,user]);
+
   const [position, setPosition] = useState([27.700769, 85.30014]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -31,6 +50,13 @@ const Page = () => {
 
     console.log("Submitting:", formData);
   };
+
+  if (validUser == undefined) {
+    return <div>Loading...</div>;
+  }
+  if (!validUser) {
+    return <div>You are not a guide.</div>;
+  }
 
   return (
     <main className="bg-[#F2F6FB] flex flex-col justify-center lg:items-center px-20 py-10">
