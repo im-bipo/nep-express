@@ -38,6 +38,7 @@ export const getPlaces = async () => {
     select: {
       id: true,
       name: true,
+      thumbnail : true
     },
   });
   return places
@@ -86,4 +87,3 @@ export const getPlaceById = async (id: string): Promise<Place | null> => {
     throw new Error(`Failed to retrieve place: ${error instanceof Error ? error.message : "Unknown error"}`);
   }
 };
-
