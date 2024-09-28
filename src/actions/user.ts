@@ -10,6 +10,13 @@ export const getUserData = async ({ id }: { id: string }) => {
   return user;
 };
 
+export const getGuides = async () =>{
+  const guides = await prisma.user.findMany({
+    where: { role: "GUIDE" },
+  });
+  return guides;
+}
+
 //for guide
 export const iamGuide = async (data: FormData) => {
   const user_id = data.get("id") as string;
