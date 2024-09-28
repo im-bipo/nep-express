@@ -62,6 +62,7 @@ const Page = ({searchParams}) => {
   return (
     <div className="timeline">
       {preTrip.map((entry, index) => (
+
         <div
           key={index}
           className={`timeline-container ${index % 2 === 0 ? "left" : "right"}`}
@@ -73,6 +74,7 @@ const Page = ({searchParams}) => {
               {entry.isEndpoint
                 ? "Endpoint"
                 : entry.description.replace("{referenceTitle}", referenceTitle)}
+
             </p>
             {selectedIndex === index && (
               <button

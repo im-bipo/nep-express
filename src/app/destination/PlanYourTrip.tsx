@@ -74,7 +74,9 @@ console.log(availablePlaces)
             Select Starting Point
           </option>
           {availablePlaces.map((place) => (
+
             <option key={place.id} value={place.id}>
+
               {place.name}
             </option>
           ))}
@@ -97,6 +99,7 @@ console.log(availablePlaces)
           </option>
           {availablePlaces.map((place) => (
             <option key={place.id} value={place.id}>
+
               {place.name}
             </option>
           ))}

@@ -33,7 +33,9 @@ const DestinationPage = async ({
     {
       title: "Starting Point",
       icons: <IoLocationSharp className="text-[#d9d9d9]" />,
+
       value: starting?.name,
+
     },
     {
       title: "Final Destination",
