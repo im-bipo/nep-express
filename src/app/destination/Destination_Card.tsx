@@ -19,7 +19,6 @@ const Destination_Card = async () => {
                 alt={destination.name}
                 className="object-contain w-full rounded-md h-full"
               />
-              ,
             </div>
             <div className="text-sm absolute bottom-5 text-white left-5 w-full border-l-4 pl-2 bg-black bg-opacity-45">
               {destination.name}

@@ -25,7 +25,7 @@ const GuideForm = () => {
         </div>
         <div className="mb-4">
           <label htmlFor="citizenshipNo" className="blocktext-black text-xl font-medium">
-            Citizenship Card
+            Citizenship No
           </label>
           <input
             type="text"

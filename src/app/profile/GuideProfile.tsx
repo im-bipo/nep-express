@@ -5,6 +5,7 @@ import {
   getKindeServerSession,
   LogoutLink,
 } from "@kinde-oss/kinde-auth-nextjs/server";
+import Image from "next/image";
 
 const GuideProfile = async () => {
   const { getUser } = getKindeServerSession();
@@ -17,7 +18,7 @@ const GuideProfile = async () => {
       <div className="grid grid-cols-12 w-10/12 mx-auto ">
         <div className="col-span-5">
           <div className="flex flex-col gap-4">
-            <img
+            <Image
               src={user.picture}
               alt="guideprofile"
               width={500}
